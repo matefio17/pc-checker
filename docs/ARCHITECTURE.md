@@ -289,17 +289,16 @@ Program **działa naprawdę** tylko na Windows (WMI i PowerShell nie istnieją n
    ┌──────────── serwer Linux ────────────┐                 ┌──────── Windows 11 ────────┐
    │ VS Code (Remote-SSH) / vim           │                 │                            │
    │ kod → pytest (mocki) → git commit    │── git push ───▶ │ git pull                   │
-   │                                      │  (repo „bare”   │ pc-checker (prawdziwe dane)│
-   │ tests/fixtures/*.json  ◀─────────────┼── na serwerze) ─│ --dump-raw → próbki JSON   │
+   │                                      │   (GitHub)      │ pc-checker (prawdziwe dane)│
+   │ tests/fixtures/*.json  ◀─────────────┼─────────────────│ --dump-raw → próbki JSON   │
    └──────────────────────────────────────┘                 └────────────────────────────┘
 ```
 
 **Jak połączyć maszyny (zalecane):**
 - **Edycja:** VS Code na dowolnym komputerze + rozszerzenie **Remote - SSH** → pracujesz bezpośrednio na plikach serwera,
   a terminal w VS Code to terminal Linuxa. Świetna okazja do ćwiczenia Linuxa.
-- **Przesyłanie kodu na Windows:** „gołe” repozytorium git na serwerze (`git init --bare ~/git/pc-checker.git`)
-  jako `origin`. Linux robi `git push`, Windows robi `git pull` przez SSH. Bez GitHuba, wszystko u Ciebie.
-  (Alternatywa: GitHub/GitLab jako pośrednik – działa tak samo.)
+- **Przesyłanie kodu na Windows:** repozytorium na **GitHubie** jako `origin`. Linux robi `git push`, Windows robi `git pull`.
+  Dodatkowy plus: kopia zapasowa kodu poza serwerem.
 
 **Trzy zasady, które sprawiają, że to działa:**
 
@@ -370,3 +369,4 @@ lub automatyczne wykrywanie modułów – ale **nie teraz**. Najpierw prostota.
 | 2026-09-28 | LibreHardwareMonitor jako źródło temperatur | Windows nie udostępnia wiarygodnych temperatur bez zewnętrznego sterownika |
 | 2026-09-28 | Dystrybucja jako `.exe` (PyInstaller) | Uruchamianie na komputerach klientów bez instalowania Pythona |
 | 2026-09-28 | **Kod i repozytorium na serwerze Linux, uruchamianie na Windows** | Użytkownik chce ćwiczyć pracę na Linuxie; izolacja Windows w `winapi.py` + mocki + próbki z `--dump-raw` pozwalają testować na Linuxie |
+| 2026-09-29 | GitHub jako `origin` (zamiast repozytorium bare na serwerze) | Wybór użytkownika; dodatkowo kopia zapasowa poza serwerem |
