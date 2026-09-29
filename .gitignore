@@ -1,0 +1,17 @@
+# Materiały edukacyjne: plan, słowniczek, ściągi (lokalne, nie trafiają do repozytorium)
+docs/learning/
+
+# Środowisko wirtualne
+.venv/
+
+# Pliki tymczasowe Pythona (skompilowany kod)
+__pycache__/
+*.pyc
+
+# Wyniki budowania .exe (PyInstaller)
+build/
+dist/
+*.spec
+
+# Raporty generowane przez program
+reports_out/
