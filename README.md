@@ -10,7 +10,8 @@ Narzędzie w Pythonie (uruchamiane z wiersza poleceń) do diagnostyki komputeró
 4. **Tworzy raport** – w terminalu (kolorowo) i do pliku (JSON, później HTML).
 5. **(docelowo) Działa jako jeden plik `pc-checker.exe`** – do uruchomienia z pendrive'a na komputerze klienta, bez instalowania Pythona.
 
-> Status projektu: **projektowanie**. Kod jeszcze nie istnieje – powstaje krok po kroku według planu.
+> Status projektu: **wczesny rozwój (v0.1.0)**. Gotowy jest szkielet projektu – pakiet instaluje się przez `pip`
+> i uruchamia komendą `pc-checker`. Diagnostyka (kolektory, testy, raporty) powstaje krok po kroku.
 
 ## Dokumentacja
 
@@ -20,6 +21,49 @@ Narzędzie w Pythonie (uruchamiane z wiersza poleceń) do diagnostyki komputeró
 | [docs/METRICS.md](docs/METRICS.md) | Katalog metryk i testów – co zbieramy, skąd i jakie są progi |
 
 Materiały edukacyjne (plan pracy, słowniczek, konwencje) leżą lokalnie w `docs/learning/` i nie są częścią repozytorium.
+
+## Instalacja (development)
+
+Kod powstaje na Linuxie, a uruchamiany jest na Windows 11 (ARCHITECTURE.md §11). Na obu systemach:
+
+**Linux (bash):**
+```bash
+git clone https://github.com/matefio17/pc-checker.git
+cd pc-checker
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+```
+
+**Windows 11 (PowerShell):**
+```powershell
+git clone https://github.com/matefio17/pc-checker.git C:\pc-checker
+cd C:\pc-checker
+python -m venv .venv
+.venv\Scripts\Activate.ps1          # wymaga: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+pip install -e ".[dev]"             # na Windows doinstaluje też wmi + pywin32
+```
+
+Sprawdzenie – obie komendy powinny zadziałać:
+```bash
+pc-checker
+python -m pc_checker
+```
+
+Po `git pull` z nowymi zależnościami w `pyproject.toml` ponów `pip install -e ".[dev]"`.
+
+## Struktura (stan obecny)
+
+```
+src/pc_checker/
+├── __init__.py     ← pakiet
+├── __main__.py     ← uruchamianie przez: python -m pc_checker
+└── cli.py          ← punkt wejścia main()
+tests/              ← testy (pytest) – w przygotowaniu
+pyproject.toml      ← metadane, zależności, komenda pc-checker
+```
+
+Docelowa struktura: [ARCHITECTURE.md §4](docs/ARCHITECTURE.md).
 
 ## Docelowe użycie (gdy powstanie)
 
