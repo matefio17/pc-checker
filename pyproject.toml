@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pc-checker"
+version = "0.1.0"
+description = "Narzędzie do diagnostyki komputerów z Windows 11"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "psutil",
+    "rich",
+    "py-cpuinfo",
+    "wmi; sys_platform == 'win32'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[project.scripts]
+pc-checker = "pc_checker.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
