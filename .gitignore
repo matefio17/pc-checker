@@ -15,3 +15,6 @@ dist/
 
 # Raporty generowane przez program
 reports_out/
+
+# Pliki generowane przy instalacji (setuptools)
+*.egg-info/
